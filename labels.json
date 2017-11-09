@@ -1,0 +1,102 @@
+[
+    {
+        "name": "blocker",
+        "color": "e0665e"
+    },
+    {
+        "name": "bug: documentation",
+        "color": "fc2929"
+    },
+    {
+        "name": "bug: product",
+        "color": "fc2929"
+    },
+    {
+        "name": "bug: sample",
+        "color": "fc2929"
+    },
+    {
+        "name": "by design",
+        "color": "d483ea"
+    },
+    {
+        "name": "duplicate",
+        "color": "cccccc"
+    },
+    {
+        "name": "external",
+        "color": "dddd35"
+    },
+    {
+        "name": "fixed",
+        "color": "309918"
+    },
+    {
+        "name": "fun",
+        "color": "c7f742"
+    },
+    {
+        "name": "help wanted",
+        "color": "159818"
+    },
+    {
+        "name": "high impact",
+        "color": "c12eea"
+    },
+    {
+        "name": "loc (localization issue)",
+        "color": "cc9726"
+    },
+    {
+        "name": "needs more info",
+        "color": "650b9e"
+    },
+    {
+        "name": "not actionable",
+        "color": "3e9dc9"
+    },
+    {
+        "name": "question",
+        "color": "cc317c"
+    },
+    {
+        "name": "request: awaiting validation",
+        "color": "b60205"
+    },
+    {
+        "name": "request: documentation",
+        "color": "b60205"
+    },
+    {
+        "name": "request: feature",
+        "color": "b60205"
+    },
+    {
+        "name": "request: sample",
+        "color": "b60205"
+    },
+    {
+        "name": "resolved: awaiting prod deployment",
+        "color": "4af965"
+    },
+    {
+        "name": "resolved: awaiting validation",
+        "color": "4af965"
+    },
+    {
+        "name": "simple",
+        "color": "90edb2"
+    },
+    {
+        "name": "stack overflow",
+        "color": "bfd4f2"
+    },
+    {
+        "name": "under investigation",
+        "color": "d4c5f9"
+    },
+    {
+        "name": "won't fix",
+        "color": "4adb89"
+    }
+]
