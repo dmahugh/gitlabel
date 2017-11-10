@@ -2,7 +2,7 @@
 import json
 
 import click
-import githuberino
+import ghlib
 import requests
 
 @click.command()
@@ -10,6 +10,7 @@ import requests
               help='infile (.json file or owner/repo)', metavar='<str>')
 @click.option('-o', '--output', default='',
               help='output (.json file or owner/repo)', metavar='<str>')
+
 def cli(infile, output):
     """command line interface - main entry point"""
     if not infile:
@@ -30,7 +31,7 @@ def read_repo(org_repo):
     """Read label definitions from a GitHub owner/repo, return label set."""
     return [{'name': label['name'],
              'color': label['color']}
-            for label in githuberino.github_allpages(endpoint=f'/repos/{org_repo}/labels')]
+            for label in ghlib.github_allpages(endpoint=f'/repos/{org_repo}/labels')]
 
 def write(labelset, output):
     """Write to .json file or owner/repo (or console)."""
@@ -39,7 +40,7 @@ def write(labelset, output):
             fhandle.write(json.dumps(labelset, indent=4))
     elif output:
         return write_repo(labelset, org_repo=output)
-    else:
+    elif labelset:
         click.echo('[\n    ', nl=False)
         click.echo(',\n    '.join([json.dumps(label) for label in labelset]))
         click.echo(']')
@@ -47,15 +48,26 @@ def write(labelset, output):
 def write_repo(labelset, org_repo):
     """Write a label set to a GitHub owner/repo."""
 
-    labels_before = read_repo(org_repo)
+    # create a list of the labels currently defined in this repo
+    labels_before = [label['name'] for label in read_repo(org_repo)]
 
-    #/// need a final prompt here:
-    #    - show existing labels, how many will be added
-    #    - prompt for whether to proceed
+    # create a list of the new labels to be added to the repo
+    to_add = [label['name'] for label in labelset if not label['name'] in labels_before]
 
-    for label in labelset:
-        if not label['name'] in labels_before:
-            click.echo('Label added: ' + label['name'])
-            pass #/// add this label
+    click.echo('NEW LABELS TO ADD: ' + ', '.join(to_add))
+    prompt = f'{len(to_add)} LABELS WILL BE ADDED TO {org_repo.upper()}. PROCEED?'
+    if not click.confirm(prompt, default=False, abort=True):
+        return
 
-    print(f'/// write_repo({org_repo})')
+    # convert labelset into a dictionary of name-color mappings
+    colors = {label['name']:label['color'] for label in labelset}
+
+    for label_name in to_add:
+        response = requests.post(url=f'https://api.github.com/repos/{org_repo}/labels',
+                                 headers={'Accept': 'application/vnd.github.v3+json'},
+                                 data=json.dumps({"name": label_name, "color": colors[label_name]}),
+                                 auth=ghlib.auth_tuple())
+        if response.ok:
+            click.echo('Label added: ' + label_name)
+        else:
+            click.echo(f'ERROR ({response.status_code}) adding label: ' + label_name)

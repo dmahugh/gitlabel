@@ -9,9 +9,19 @@ import os
 
 import requests
 
-def github_allpages(endpoint=None, auth=None, #------------------------------<<<
-                    headers=None, state=None, session=None):
+def auth_tuple():
+    """Return default auth tuple for GitHub API access.
+    This uses the setting() INI files stored in the ..\_private folder.
+    The default user is obtained from dougerino.ini, and the PAT (personal
+    access token) for that user is obtained from github.ini.
+    """
+    default_account = setting('dougerino', 'defaults', 'github_user')
+    if not default_account:
+        return () # no default account found
+    return (default_account, setting('github', default_account, 'pat'))
 
+def github_allpages(endpoint=None, auth=None, headers=None, state=None,
+                    session=None):
     """Get data from GitHub REST API.
 
     endpoint     = HTTP endpoint for GitHub API call
@@ -50,7 +60,7 @@ def github_allpages(endpoint=None, auth=None, #------------------------------<<<
 
     return payload
 
-def github_pagination(link_header): #----------------------------------------<<<
+def github_pagination(link_header):
     """Parse values from the 'link' HTTP header returned by GitHub API.
 
     1st parameter = either of these options ...
@@ -86,8 +96,8 @@ def github_pagination(link_header): #----------------------------------------<<<
 
     return retval
 
-def github_rest_api(*, endpoint=None, auth=None, headers=None, #-------------<<<
-                    state=None, session=None):
+def github_rest_api(*, endpoint=None, auth=None, headers=None, state=None,
+                    session=None):
     """Call the GitHub API.
 
     endpoint     = the HTTP endpoint to call; if endpoint starts with / (for
@@ -116,12 +126,7 @@ def github_rest_api(*, endpoint=None, auth=None, headers=None, #-------------<<<
         return None
 
     # set auth to default if needed
-    if not auth:
-        default_account = setting('dougerino', 'defaults', 'github_user')
-        if default_account:
-            auth = (default_account, setting('github', default_account, 'pat'))
-        else:
-            auth = () # no auth specified, and no default account found
+    auth = auth if auth else auth_tuple()
 
     # add the V3 Accept header to the dictionary
     headers = {} if not headers else headers
@@ -173,7 +178,7 @@ def github_rest_api(*, endpoint=None, auth=None, headers=None, #-------------<<<
 
     return response
 
-def setting(topic, section, key): #------------------------------------------<<<
+def setting(topic, section, key):
     """Retrieve a private setting stored in a local .ini file.
 
     topic = name of the ini file; e.g., 'azure' for azure.ini

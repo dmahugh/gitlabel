@@ -1,23 +1,75 @@
 [
     {
+        "name": "area: authentication",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: azure",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: dynamics",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: edu",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: excel",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: office reports",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: onedrive",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: onenote",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: outlook",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: planner",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: rome",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: sharepoint",
+        "color": "1d76db"
+    },
+    {
+        "name": "area: teams",
+        "color": "1d76db"
+    },
+    {
         "name": "blocker",
-        "color": "e0665e"
+        "color": "d83b01"
     },
     {
         "name": "bug: documentation",
-        "color": "fc2929"
+        "color": "d83b01"
     },
     {
         "name": "bug: product",
-        "color": "fc2929"
+        "color": "d83b01"
     },
     {
         "name": "bug: sample",
-        "color": "fc2929"
+        "color": "d83b01"
     },
     {
         "name": "by design",
-        "color": "d483ea"
+        "color": "cccccc"
     },
     {
         "name": "duplicate",
@@ -25,39 +77,43 @@
     },
     {
         "name": "external",
-        "color": "dddd35"
+        "color": "cccccc"
     },
     {
         "name": "fixed",
-        "color": "309918"
+        "color": "0e8a16"
     },
     {
         "name": "fun",
-        "color": "c7f742"
+        "color": "5319e7"
+    },
+    {
+        "name": "good first issue",
+        "color": "5319e7"
     },
     {
         "name": "help wanted",
-        "color": "159818"
+        "color": "5319e7"
     },
     {
         "name": "high impact",
-        "color": "c12eea"
+        "color": "d93f0b"
     },
     {
         "name": "loc (localization issue)",
-        "color": "cc9726"
+        "color": "cccccc"
     },
     {
         "name": "needs more info",
-        "color": "650b9e"
+        "color": "fbca04"
     },
     {
         "name": "not actionable",
-        "color": "3e9dc9"
+        "color": "cccccc"
     },
     {
         "name": "question",
-        "color": "cc317c"
+        "color": "cccccc"
     },
     {
         "name": "request: awaiting validation",
@@ -84,19 +140,15 @@
         "color": "4af965"
     },
     {
-        "name": "simple",
-        "color": "90edb2"
-    },
-    {
         "name": "stack overflow",
-        "color": "bfd4f2"
+        "color": "fbca04"
     },
     {
         "name": "under investigation",
-        "color": "d4c5f9"
+        "color": "fbca04"
     },
     {
         "name": "won't fix",
-        "color": "4adb89"
+        "color": "cccccc"
     }
 ]
