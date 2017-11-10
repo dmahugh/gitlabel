@@ -46,7 +46,7 @@ def github_allpages(endpoint=None, auth=None, headers=None, state=None,
         if not page_endpoint:
             break # no more results to process
 
-    return payload
+    return payload, response.status_code
 
 def github_pagination(link_header):
     """Parse values from the 'link' HTTP header returned by GitHub API.

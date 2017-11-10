@@ -31,7 +31,10 @@ def read(infile):
 
 def read_repo(org_repo):
     """Read label definitions from a GitHub owner/repo, return label set."""
-    repo_labels = ghlib.github_allpages(endpoint=f'/repos/{org_repo}/labels')
+    repo_labels, status_code = ghlib.github_allpages(endpoint=f'/repos/{org_repo}/labels')
+    if status_code < 200 or status_code > 299:
+        raise click.Abort # abort if error
+
     return [{'name': label['name'], 'color': label['color']}
             for label in repo_labels]
 
