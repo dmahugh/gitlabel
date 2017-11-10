@@ -31,9 +31,9 @@ def read(infile):
 
 def read_repo(org_repo):
     """Read label definitions from a GitHub owner/repo, return label set."""
-    return [{'name': label['name'],
-             'color': label['color']}
-            for label in ghlib.github_allpages(endpoint=f'/repos/{org_repo}/labels')]
+    repo_labels = ghlib.github_allpages(endpoint=f'/repos/{org_repo}/labels')
+    return [{'name': label['name'], 'color': label['color']}
+            for label in repo_labels]
 
 def write(labelset, output):
     """Write to .json file or owner/repo (or console)."""
@@ -56,6 +56,10 @@ def write_repo(labelset, org_repo):
 
     # create a list of the new labels to be added to the repo
     to_add = [label['name'] for label in labelset if not label['name'] in labels_before]
+
+    if len(to_add) == 0:
+        click.echo('Nothing to do: none of the input labels are missing from ' + org_repo)
+        return
 
     click.echo('NEW LABELS TO ADD: ' + ', '.join(to_add))
     prompt = f'{len(to_add)} LABELS WILL BE ADDED TO {org_repo.upper()}. PROCEED?'
