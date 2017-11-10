@@ -11,7 +11,7 @@ import requests
 
 def auth_tuple():
     """Return default auth tuple for GitHub API access.
-    This uses the setting() INI files stored in the ..\_private folder.
+    This uses the setting() INI files stored in the ../_private folder.
     The default user is obtained from dougerino.ini, and the PAT (personal
     access token) for that user is obtained from github.ini.
     """
@@ -196,4 +196,3 @@ def setting(topic, section, key):
     except configparser.NoSectionError:
         retval = None
     return retval
-
