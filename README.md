@@ -19,19 +19,18 @@ Gitlabel uses these packages:
 * [Requests](http://docs.python-requests.org/en/master/) version 2.18.1 or above
 
 To install gitlabel on a Windows 10, Linux, or Mac OS X machine:
-* Clone this repo or download as a ZIP file and un-zip into a folder
+* Install the latest version of Python from the Download page at [python.org](https://www.python.org/) and check the "add Python to path" option.
+* Clone this repo or download as a ZIP file and un-zip into a folder.
 * In the folder containing the repo: ```pip install .```
-* If you'd like to make changes to the code later and immediately see them in the command-line behavior, install with ```pip install --editable .``` instead
-
-Once you've done that, gitlabel will be available at the command line. Use the -h or --help option to get syntax help.
-
-![gitlabel help](images/gitlabel-help.png)
+* If you'd like to make changes to the code later and immediately see them in the command-line behavior, install with ```pip install --editable .``` instead.
 
 ## Configuring Authentication
 
 Gitlabel uses a GitHub personal access token (PAT) to authenticte for calls to the GitHub V3 API. A PAT allows the gitlabel application to work with GitHub on your behalf, so gitlabel will have the same rights that you have in GitHub. For example, you'll be able to write label definitions to your own repos, but not to my repos. You can read label definitions from any public repo.
 
-To obtain a PAT, see GitHub's documentation on [Creating a token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/#creating-a-token).
+To obtain a PAT, see GitHub's documentation on [Creating a token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/#creating-a-token). Give the token ```repo``` scope by selecting that option:
+
+![PAT scopes](images/pat-scopes.png)
 
 Gitlabel reads your username and PAT from a ```github.ini``` file that you'll need to create, which should look like this:
 
@@ -43,7 +42,20 @@ github_user = your_github_user_name
 pat = your_personal_access_token
 ```
 
-To avoid accidental uploading of that confidential information to GitHub, the ```github.ini``` file is stored in a folder named ```_private``` under the _parent folder_ of the repo where gitlabel is installed. Once you've created the INI file in that folder and filled in your username and PAT, you're ready to run gitlabel from the command prompt. You can run it in any folder, and it will find the auth configuration by looking for ```..\_private\github.ini``` relative to the install folder.
+There is a github.ini template file in this repo, which you can edit to add your username and PAT.
+
+To avoid accidental uploading of that confidential information to GitHub, the ```github.ini``` file is stored in a folder named ```_private``` under the _parent folder_ of the repo where gitlabel is installed. After you've set up your github.ini in the root folder of your cloned repo, use these commands to move it to that location:
+
+```DOS
+md ..\_private
+move github.ini ..\_private
+```
+
+Once you've done that, you're ready to run gitlabel from the command prompt. You can run it in any folder, and it will find the auth configuration by looking for ```..\_private\github.ini``` relative to the install folder.
+
+To verify your configuration and installation, try displaying the help screen with the ```gitlabel --help``` command:
+
+![gitlabel help](images/gitlabel-help.png)
 
 # Usage
 
