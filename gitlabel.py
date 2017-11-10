@@ -22,10 +22,11 @@ def cli(infile, output):
 
 def read(infile):
     """Read from a .json file or owner/repo."""
+
     if infile.lower().endswith('.json'):
-        return json.loads(open(infile).read())
-    else:
-        return read_repo(org_repo=infile)
+        return json.loads(open(infile).read()) # read from JSON file
+
+    return read_repo(org_repo=infile) # read from repo
 
 def read_repo(org_repo):
     """Read label definitions from a GitHub owner/repo, return label set."""
