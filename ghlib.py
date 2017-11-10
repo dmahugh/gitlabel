@@ -1,8 +1,4 @@
-"""GitHub helper library.
-
-Copyright 2015-2017 by Doug Mahugh. All Rights Reserved.
-Licensed under the MIT License.
-"""
+"""GitHub helper library."""
 import configparser
 import json
 import os
@@ -12,10 +8,10 @@ import requests
 def auth_tuple():
     """Return default auth tuple for GitHub API access.
     This uses the setting() INI files stored in the ../_private folder.
-    The default user is obtained from dougerino.ini, and the PAT (personal
-    access token) for that user is obtained from github.ini.
+    The default user and PAT (personal access token) for that user are
+    obtained from github.ini.
     """
-    default_account = setting('dougerino', 'defaults', 'github_user')
+    default_account = setting('github', 'defaults', 'github_user')
     if not default_account:
         return () # no default account found
     return (default_account, setting('github', default_account, 'pat'))
@@ -39,18 +35,10 @@ def github_allpages(endpoint=None, auth=None, headers=None, state=None,
         response = github_rest_api(endpoint=page_endpoint, auth=auth, \
             headers=headers, state=state, session=session)
         if (state and state.verbose) or response.status_code != 200:
-            # note that status code is always displayed if not 200/OK
-            print('      Status: {0}, {1} bytes returned'. \
-                format(response, len(response.text)))
+            # status code is always displayed if not 200/OK
+            print(f'Status: {response}, {len(response.text)} bytes returned')
         if response.ok:
             thispage = json.loads(response.text)
-            # In the past, we handled commit data differently because
-            # the sheer volume (e.g., over 100K commits in a repo) causes
-            # out of memory errors if all fields are returned. DISABLED
-            #if 'commit' in endpoint:
-            #    minimized = [_['commit'] for _ in thispage]
-            #    payload.extend(minimized)
-            #else:
             payload.extend(thispage)
 
         pagelinks = github_pagination(response)
