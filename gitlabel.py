@@ -5,14 +5,15 @@ import click
 import ghlib
 import requests
 
-@click.command()
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+@click.command(context_settings=CONTEXT_SETTINGS, options_metavar='<options>')
 @click.option('-i', '--infile', default='',
               help='infile (.json file or owner/repo)', metavar='<str>')
 @click.option('-o', '--output', default='',
               help='output (.json file or owner/repo)', metavar='<str>')
 
 def cli(infile, output):
-    """command line interface - main entry point"""
+    """Command line tool for reading/writing sets of GitHub label definitions."""
     if not infile:
         click.echo('ERROR: must specify -i or --infile')
         return
@@ -39,6 +40,7 @@ def write(labelset, output):
     if output.lower().endswith('.json'):
         with open(output, 'w') as fhandle:
             fhandle.write(json.dumps(labelset, indent=4))
+            click.echo(f'{len(labelset)} label definitions written to: {output}')
     elif output:
         return write_repo(labelset, org_repo=output)
     elif labelset:
