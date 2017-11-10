@@ -97,7 +97,7 @@
     },
     {
         "name": "high impact",
-        "color": "d93f0b"
+        "color": "b60205"
     },
     {
         "name": "loc (localization issue)",
@@ -113,31 +113,31 @@
     },
     {
         "name": "question",
-        "color": "cccccc"
+        "color": "fbca04"
     },
     {
         "name": "request: awaiting validation",
-        "color": "b60205"
+        "color": "d93f0b"
     },
     {
         "name": "request: documentation",
-        "color": "b60205"
+        "color": "d93f0b"
     },
     {
         "name": "request: feature",
-        "color": "b60205"
+        "color": "d93f0b"
     },
     {
         "name": "request: sample",
-        "color": "b60205"
+        "color": "d93f0b"
     },
     {
         "name": "resolved: awaiting prod deployment",
-        "color": "4af965"
+        "color": "0e8a16"
     },
     {
         "name": "resolved: awaiting validation",
-        "color": "4af965"
+        "color": "0e8a16"
     },
     {
         "name": "stack overflow",
